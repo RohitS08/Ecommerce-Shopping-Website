@@ -43,7 +43,7 @@ const ProductList = ({products, status}) => {
                                     <div className='product-item-body'>
                                         <h6 className = "product-item-title text-pine-green fw-4 fs-15">{product.title}</h6>
                                        <div className='custom-flex'>
-                                       <div className = "product-item-price text-regal-blue fw-7 fs-18">{formatPrice(product.price)}</div>
+                                       <div className = "product-item-price text-regal-blue fw-7 fs-18">₹{formatPrice(product.price)}</div>
                                         <div className = ""><button className='btn-primary custom-btn'>Buy Now</button></div>
                                        </div>
 

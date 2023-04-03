@@ -1,19 +1,21 @@
 @import "../../App.scss";
 
-.product-items{
+.product-items {
     row-gap: 20px;
-    .product-item{
+
+    .product-item {
         box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 8px 0px;
         padding: 18px;
         border-radius: 4px;
-        &-body{
+
+        &-body {
             padding: 12px 0;
         }
 
-        &-img{
+        &-img {
             position: relative;
 
-            .product-item-cat{
+            .product-item-cat {
                 position: absolute;
                 top: 8px;
                 right: 8px;
@@ -24,30 +26,44 @@
             }
         }
 
-        &-title{
+        &-title {
             padding: 8px 0;
             opacity: 0.8;
             display: block;
         }
     }
 
-    @media screen and (min-width: 576px){
+    .card {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+        &:hover {
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+    }
+
+    .buttonActive{
+        background-color: rgba(74, 97, 238,1);
+    }
+
+   
+
+    @media screen and (min-width: 576px) {
         grid-template-columns: repeat(2, 1fr);
-            column-gap: 20px;
+        column-gap: 20px;
     }
 
-    @media screen and (min-width: 768px){
+    @media screen and (min-width: 768px) {
         grid-template-columns: repeat(3, 1fr);
-            column-gap: 20px;
+        column-gap: 20px;
     }
 
-    @media screen and (min-width: 992px){
+    @media screen and (min-width: 992px) {
         grid-template-columns: repeat(4, 1fr);
-            column-gap: 20px;
+        column-gap: 20px;
     }
 
-    @media screen and (min-width: 1200px){
+    @media screen and (min-width: 1200px) {
         grid-template-columns: repeat(5, 1fr);
-            column-gap: 20px;
+        column-gap: 20px;
     }
 }

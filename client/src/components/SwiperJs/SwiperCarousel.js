@@ -3,6 +3,10 @@ import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSelector } from 'react-redux';
+import img1 from '../../assets/images/slider-img-5.png';
+import img2 from '../../assets/images/slider-img-7.png';
+import img3 from '../../assets/images/slider-img-6.png';
+import img4 from '../../assets/images/slider-img-4.png';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -40,9 +44,9 @@ function SwiperCarousel() {
                 className="mySwiper"
             >
                 {
-                    data.slice(0, 3).map(Item => (
+                    [img3,img1,img2,img4].map(Item => (
                         <SwiperSlide key={data.id}>
-                            <img style={{ width: "100%", height: "60%", objectFit: "cover" }} src="https://fashiontool.vercel.app/static/media/storeimg.c2db3f70ed33763bb949.png" alt="Slider Image" />
+                            <img style={{ width: "100%", height: "60%", objectFit: "cover" }} src={Item} alt="Slider Image" />
                         </SwiperSlide>
                     ))
                 }

@@ -20,7 +20,7 @@ const Category = ({categories, status}) => {
                     {
                         categories.slice(0, 5).map(category => (
                             <Link to = {`category/${category.id}`} key = {category.id}>
-                                <div className = "category-item" >
+                                <div className = "category-item card" >
                                     <div className='category-item-img'>
                                         <img src = {category.image} alt = "" />
                                         

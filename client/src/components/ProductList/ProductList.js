@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { STATUS } from '../../utils/status';
 import "./ProductList.scss";
 import { setModalData, setIsModalVisible } from '../../store/modalSlice';
@@ -8,22 +8,41 @@ import { formatPrice } from '../../utils/helpers';
 import Loader from '../Loader/Loader';
 import Error from '../Error/Error';
 
-const ProductList = ({products, status}) => {
+
+const ProductList = ({ products, status }) => {
     const dispatch = useDispatch();
-    const {isModalVisible} = useSelector((state) => state.modal);
-    const {isLoggedIn} = useSelector(state => state.user);
-    
+    const { isModalVisible } = useSelector((state) => state.modal);
+    const { isLoggedIn } = useSelector(state => state.user);
+
+
+    // for pagination
+    const [Currentpage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(8);
+
+    // for getting first index and last index for array.slice() method #pagination
+    const lastPostIndex = Currentpage * postsPerPage;
+    const firstPostIndex = lastPostIndex - postsPerPage;
+    const currentPosts = products.slice(firstPostIndex, lastPostIndex);
+
+    // increment count and decrement count
+    const selectPageHandler = (selectPage) => {
+        if (selectPage >= 1 && selectPage <= 8 && selectPage !== Currentpage) {
+            console.log(selectPage);
+            setCurrentPage(selectPage);
+        }
+    }
+
     const viewModalHandler = (data) => {
         dispatch(setModalData(data));
         dispatch(setIsModalVisible(true));
     }
 
-    if(status === STATUS.ERROR) return (<Error />);
-    if(status === STATUS.LOADING) return (<Loader />);
+    if (status === STATUS.ERROR) return (<Error />);
+    if (status === STATUS.LOADING) return (<Loader />);
 
     return (
-        <section className='product py-5 bg-ghost-white' id = "products">
-            { isModalVisible && <SingleProduct />}
+        <section className='product py-5 bg-ghost-white' id="products">
+            {isModalVisible && <SingleProduct />}
 
             <div className='container'>
                 <div className='product-content'>
@@ -32,20 +51,20 @@ const ProductList = ({products, status}) => {
                     </div>
                     <div className='product-items grid'>
                         {
-                            products.slice(0, 20).map(product => (
-                                <div className='product-item bg-white' key = {product.id} onClick = {() => viewModalHandler(product)}>
+                            currentPosts.map(product => (
+                                <div className='product-item bg-white card' key={product.id} onClick={() => viewModalHandler(product)}>
                                     <div className='product-item-img'>
-                                        <img src = {product.images[0]} alt = "" />
-                                        hello
-                                        <div className = "product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">{product.category.name}</div>
+                                        <img src={product.images[0]} alt="" />
+
+                                        <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">{product.category.name}</div>
 
                                     </div>
                                     <div className='product-item-body'>
-                                        <h6 className = "product-item-title text-pine-green fw-4 fs-15">{product.title}</h6>
-                                       <div className='custom-flex'>
-                                       <div className = "product-item-price text-regal-blue fw-7 fs-18">₹{formatPrice(product.price)}</div>
-                                        <div className = ""><button className='btn-primary custom-btn'>Buy Now</button></div>
-                                       </div>
+                                        <h6 className="product-item-title text-pine-green fw-4 fs-15">{product.title}</h6>
+                                        <div className='custom-flex'>
+                                            <div className="product-item-price text-regal-blue fw-7 fs-18">₹{formatPrice(product.price)}</div>
+                                            <div className=""><button className='btn-primary custom-btn' style={{backgroundColor:"#4A61EE"}}>Buy Now</button></div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -53,6 +72,26 @@ const ProductList = ({products, status}) => {
                         }
                     </div>
                 </div>
+
+                {products.length > 0 && <div className='pagination'>
+
+                    <span onClick={() => selectPageHandler(Currentpage - 1)} style={{ cursor: "pointer" }} className={Currentpage > 1 ? " " : "pagination_disable"}>Previous</span>
+
+                    {
+                        [...Array(5)].map((_, i) => {
+                            return (
+                                <button key={i} onClick={() => selectPageHandler(i + 1)} style={{ padding: 15 }} className={Currentpage === i ? "pagination_selected" : ""}>{i + 1}</button>
+
+                            )
+                        })
+                    }
+
+                    <span onClick={() => selectPageHandler(Currentpage + 1)} style={{ cursor: "pointer" }} className={Currentpage === 1 ? "set" : "pagination_disable"}>Next</span>
+
+                    <h1>pagination</h1>
+                </div>
+
+                }
             </div>
         </section>
     )

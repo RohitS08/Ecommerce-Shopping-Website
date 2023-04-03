@@ -5,6 +5,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 // pages
 import {Home, Category, Cart} from "./pages/index";
 // components
+import Payment from "./components/Payment/Payment";
 import Navbar from './components/Navbar/Navbar';
 import Footer from "./components/Footer/Footer";
 import Swiper from 'swiper';
@@ -25,13 +26,13 @@ function App() {
         <BrowserRouter>
         <ToastContainer/>
           <Navbar />
-          <SwiperCarousel/>
           <Routes>
             <Route path = "/" element = {<Home />} />
             <Route path="/login" element = {<Login/>} />
             <Route path="/signup" element = {<Signup/>} />
             <Route path = "/category/:id" element = {<Category />} />
             <Route path = "/cart" element = {<Cart />} />
+            <Route path = "/payment" element = {<Payment />} />
           </Routes>
           <Footer />
         </BrowserRouter>

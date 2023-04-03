@@ -1,5 +1,6 @@
 @import "../../App.scss";
 
+body{background-color: aqua;}
 .product-items {
     row-gap: 20px;
 
@@ -39,6 +40,14 @@
         }
     }
 
+    .card{
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      
+        &:hover{
+          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+      }
+
     .custom-flex {
         display: flex;
         flex-direction: row-reverse;
@@ -52,6 +61,28 @@
         transition: all 300ms linear;
         font-size: 1.6rem;
     }
+
+    .pagination {
+        padding: 10px;
+        margin: 15px 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination_disable {
+        background-color: aqua;
+        color: red;
+        opacity: 0;
+    }
+    .set{
+        color: green !important;
+    }
+
+    .pagination_selected {
+        background-color: rgb(220, 220, 220);
+    }
+    
+
 
     @media screen and (min-width: 576px) {
         grid-template-columns: repeat(2, 1fr);

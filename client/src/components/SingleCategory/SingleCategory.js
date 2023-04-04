@@ -15,7 +15,7 @@ const SingleCategory = ({ products, status }) => {
 
     // for pagination
     const [Currentpage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(8);
+    const [postsPerPage, setPostsPerPage] = useState(10);
 
     // for getting first index and last index for array.slice() method #pagination
     const lastPostIndex = Currentpage * postsPerPage;
@@ -26,7 +26,7 @@ const SingleCategory = ({ products, status }) => {
 
     // creating an array for pagination
     let PagesCount=[];
-    for(let i=1;i<Math.ceil(products.length/postsPerPage);i++){
+    for(let i=1;i<5;i++){
         PagesCount.push(i);
     }
     console.log("pages:");
@@ -89,18 +89,18 @@ const SingleCategory = ({ products, status }) => {
 
                 {products.length > 0 && <div className='pagination' style={{marginTop:"20px",display:"flex",justifyContent:"center"}}>
 
-                    <span onClick={() => selectPageHandler(Currentpage - 1)} style={{ cursor: "pointer" }} className={Currentpage > 1 ? " " : "pagination_disable"}>Previous</span>
+                    <span onClick={() => selectPageHandler(Currentpage - 1)} style={{ cursor: "pointer" }} className={ `${"leftRightIcon"} ${Currentpage > 1 ? " " : "pagination_disable"}`}><i class="fas fa-arrow-left"></i></span>
 
                     {
                         PagesCount.map((page, i) => {
                             return (
-                                <button key={i} onClick={() => selectPageHandler(page)} style={{backgroundColor:" rgba(74, 97, 238,0.7)",color:"wheat",border:"none",margin:"0px 11px",borderRadius:"5px",padding:"6px 15px"}} className={`Custombutton ${page === Currentpage ? "buttonActive" : ""}`}>{page}</button>
+                                <button key={i} onClick={() => selectPageHandler(page)} style={{backgroundColor:" rgba(74, 97, 238,0.5)",color:"wheat",border:"none",margin:"0px 11px",borderRadius:"5px",padding:"6px 15px"}} className={page === Currentpage ? "buttonActive" : ""}>{page}</button>
 
                             )
                         })
                     }
 
-                    <span onClick={() => selectPageHandler(Currentpage + 1)} style={{ cursor: "pointer" }} className={Currentpage === 1 ? "set" : "pagination_disable"}>Next</span>
+                    <span onClick={() => selectPageHandler(Currentpage + 1)} style={{ cursor: "pointer" }} className={  ` ${"leftRightIcon"} ${Currentpage === PagesCount.length ? "pagination_disable" : ""}`}><i class="fas fa-arrow-right"></i></span>
                 </div>
 
                 }

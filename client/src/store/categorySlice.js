@@ -39,7 +39,7 @@ export default categorySlice.reducer;
 
 export const fetchCategories = () => {
     return async function fetchCategoryThunk(dispatch) {
-        // dispatch(setStatus(STATUS.LOADING));
+        dispatch(setStatus(STATUS.LOADING));
         try {
             const response = await fetch(`${BASE_URL}categories`);
             const data = await response.json();
@@ -47,7 +47,7 @@ export const fetchCategories = () => {
             console.log(data);
             console.log("category:");
             dispatch(setCategories(data.slice(0, 5)));
-            // dispatch(setStatus(STATUS.IDLE));
+            dispatch(setStatus(STATUS.IDLE));
         } catch (error) {
             dispatch(setStatus(STATUS.ERROR));
         }

@@ -20,6 +20,7 @@ const HomePage = () => {
     dispatch(fetchCategories());
     dispatch(fetchProductsByCategory(1, 'all'));
     dispatch(fetchProductsByCategory(2, 'all'));
+    dispatch(fetchProductsByCategory(3, 'all'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,6 +38,9 @@ const HomePage = () => {
       <section>
         { productsByCategory[1] && <SingleCategory products = {productsByCategory[1]} status = {catProductAllStatus} /> }
       </section>
+      {/* <section>
+        { productsByCategory[2] && <SingleCategory products = {productsByCategory[2]} status = {catProductAllStatus} /> }
+      </section> */}
     </div>
   )
 }

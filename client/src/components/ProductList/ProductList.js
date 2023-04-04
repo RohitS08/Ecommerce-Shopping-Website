@@ -5,6 +5,8 @@ import { setModalData, setIsModalVisible } from '../../store/modalSlice';
 import SingleProduct from '../SingleProduct/SingleProduct';
 import { useSelector, useDispatch } from 'react-redux';
 import { formatPrice } from '../../utils/helpers';
+import "../SingleCategory/SingleCategory.scss";
+import "../ProductList/ProductList.scss";
 import Loader from '../Loader/Loader';
 import Error from '../Error/Error';
 
@@ -17,16 +19,26 @@ const ProductList = ({ products, status }) => {
 
     // for pagination
     const [Currentpage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(8);
+    const [postsPerPage, setPostsPerPage] = useState(10);
 
     // for getting first index and last index for array.slice() method #pagination
     const lastPostIndex = Currentpage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = products.slice(firstPostIndex, lastPostIndex);
+    console.log("array data:");
+    console.log(currentPosts);
+
+    // creating an array for pagination
+    let PagesCount = [];
+    for (let i = 1; i < 5; i++) {
+        PagesCount.push(i);
+    }
+    console.log("pages:");
+    console.log(PagesCount);
 
     // increment count and decrement count
     const selectPageHandler = (selectPage) => {
-        if (selectPage >= 1 && selectPage <= 8 && selectPage !== Currentpage) {
+        if (selectPage >= 1 && selectPage <= PagesCount.length && selectPage !== Currentpage) {
             console.log(selectPage);
             setCurrentPage(selectPage);
         }
@@ -63,7 +75,7 @@ const ProductList = ({ products, status }) => {
                                         <h6 className="product-item-title text-pine-green fw-4 fs-15">{product.title}</h6>
                                         <div className='custom-flex'>
                                             <div className="product-item-price text-regal-blue fw-7 fs-18">₹{formatPrice(product.price)}</div>
-                                            <div className=""><button className='btn-primary custom-btn' style={{backgroundColor:"#4A61EE"}}>Buy Now</button></div>
+                                            <div className=""><button className='btn-primary custom-btn' style={{ backgroundColor: "#4A61EE" }}>Buy Now</button></div>
                                         </div>
 
                                     </div>
@@ -73,22 +85,20 @@ const ProductList = ({ products, status }) => {
                     </div>
                 </div>
 
-                {products.length > 0 && <div className='pagination'>
+                {products.length > 0 && <div className='pagination' style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}>
 
-                    <span onClick={() => selectPageHandler(Currentpage - 1)} style={{ cursor: "pointer" }} className={Currentpage > 1 ? " " : "pagination_disable"}>Previous</span>
+                    <span onClick={() => selectPageHandler(Currentpage - 1)} style={{ cursor: "pointer" }} className={`${"leftRightIcon"} ${Currentpage > 1 ? " " : "pagination_disable"}`}><i class="fas fa-arrow-left"></i></span>
 
                     {
-                        [...Array(5)].map((_, i) => {
+                        PagesCount.map((page, i) => {
                             return (
-                                <button key={i} onClick={() => selectPageHandler(i + 1)} style={{ padding: 15 }} className={Currentpage === i ? "pagination_selected" : ""}>{i + 1}</button>
+                                <button key={i} onClick={() => selectPageHandler(page)} style={{ backgroundColor: " rgba(74, 97, 238,0.5)", color: "wheat", border: "none", margin: "0px 11px", borderRadius: "5px", padding: "6px 15px" }} className={page === Currentpage ? "buttonActive" : ""}>{page}</button>
 
                             )
                         })
                     }
 
-                    <span onClick={() => selectPageHandler(Currentpage + 1)} style={{ cursor: "pointer" }} className={Currentpage === 1 ? "set" : "pagination_disable"}>Next</span>
-
-                    <h1>pagination</h1>
+                    <span onClick={() => selectPageHandler(Currentpage + 1)} style={{ cursor: "pointer" }} className={` ${"leftRightIcon"} ${Currentpage === PagesCount.length ? "pagination_disable" : ""}`}><i class="fas fa-arrow-right"></i></span>
                 </div>
 
                 }

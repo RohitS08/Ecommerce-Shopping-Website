@@ -203,7 +203,7 @@ input, textarea, select{
 }
 .btn-primary{
   @extend %btn-shared;
-  background-color: $clr-regal-blue;
+  background-color: rgba(74, 97, 238,1);
   color: $clr-white;
 
   &:hover{

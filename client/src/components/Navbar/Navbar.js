@@ -43,6 +43,10 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
+
+            <div>
+              <Link to="/loginPage">LoginSignup</Link>
+            </div>
             {!isLoggedIn &&
               <div>
                 <Link to="/login" className='btn-primary custom-btn' style={{ fontSize: 15, padding: "6px 16px" }}>

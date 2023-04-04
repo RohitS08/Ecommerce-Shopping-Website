@@ -77,25 +77,13 @@ const SingleProduct = () => {
               <h3 className="title text-regal-blue fs-22 fw-5">{product.title}</h3>
               <p className='description text-pine-green'>{product.description}</p>
               <div className='price fw-7 fs-24'>Price: {product.price}</div>
-              <div className="qty flex">
-                <span className="text-light-blue qty-text">Qty: </span>
-                <div className="qty-change flex">
-                  <button type="button" className='qty-dec fs-14' onClick={() => { decreaseHandler(product.id) }}>
-                    <i className="fas fa-minus text-light-blue"></i>
-                  </button>
-                  <span className="qty-value flex flex-center">{6}</span>
-                  <button type="button" className='qty-inc fs-14 text-light-blue' onClick={() => { addToCartHandler(product) }}>
-                    <i className="fas fa-plus"></i>
-                  </button>
-                  {/* <button onClick={getCartQuantity}>Click me!!</button> */}
-                </div>
-              </div>
+              
               <button type="button" className='btn-primary add-to-cart-btn' onClick={() => { addToCartHandler(product) }} 
                >
                 <span className="btn-icon">
                   <i className='fas fa-cart-shopping'></i>
                 </span>
-                <span className='btn-text'>Add To Cart</span>
+                <span className='btn-text' style={{backgroundColor:"rgb(74, 97, 238)"}}>Add To Cart</span>
               </button>
             </div>
           </div>

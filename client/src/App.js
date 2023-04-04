@@ -14,6 +14,8 @@ import { ToastContainer } from 'react-toastify';
 import Login from './components/Login/Login';
 import Signup from './components/Login/Signup';
 import {isAuthenticated} from './store/userSlice';
+import LoginPage  from './components/Login/LoginPage';
+import SignupPage from './components/Login/SignupPage';
 import {useDispatch} from 'react-redux';
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
             <Route path = "/category/:id" element = {<Category />} />
             <Route path = "/cart" element = {<Cart />} />
             <Route path = "/payment" element = {<Payment />} />
+            <Route path = "/loginPage" element = {<LoginPage />} />
+            <Route path = "/SignupPage" element = {<SignupPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

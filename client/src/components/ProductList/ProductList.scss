@@ -69,11 +69,7 @@ body{background-color: aqua;}
         justify-content: center;
     }
 
-    .pagination_disable {
-        background-color: aqua;
-        color: red;
-        opacity: 0;
-    }
+  
     .set{
         color: green !important;
     }
@@ -103,4 +99,10 @@ body{background-color: aqua;}
         grid-template-columns: repeat(4, 1fr);
         column-gap: 20px;
     }
+}
+
+.pagination_disable {
+    background-color: aqua;
+    color: red;
+    opacity: 0;
 }

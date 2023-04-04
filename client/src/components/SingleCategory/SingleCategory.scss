@@ -41,9 +41,7 @@
         }
     }
 
-    .buttonActive{
-        background-color: rgba(74, 97, 238,1);
-    }
+  
 
    
 
@@ -66,4 +64,13 @@
         grid-template-columns: repeat(5, 1fr);
         column-gap: 20px;
     }
+}
+.buttonActive{
+    background-color: rgba(74, 97, 238,1) !important;
+}
+
+.leftRightIcon{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
 }

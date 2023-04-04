@@ -44,8 +44,8 @@ const SingleProduct = () => {
     //   totalPrice
     // }
     // dispatch(addToCart(tempProduct));
-    // dispatch(setIsModalVisible(false));
-    // navigate('/cart');
+    dispatch(setIsModalVisible(false));
+    navigate('/cart');
     // alert("Hello Vivek!");
     dispatch(addToCartt(product));
     console.log("Data:");
@@ -76,7 +76,7 @@ const SingleProduct = () => {
             <div className="details-info">
               <h3 className="title text-regal-blue fs-22 fw-5">{product.title}</h3>
               <p className='description text-pine-green'>{product.description}</p>
-              <div className='price fw-7 fs-24'>Price: {product.price}</div>
+              <div className='price fw-7 fs-24'>₹ {product.price}</div>
               
               <button type="button" className='btn-primary add-to-cart-btn' onClick={() => { addToCartHandler(product) }} 
                >

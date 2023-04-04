@@ -21,8 +21,8 @@ const SingleCategory = ({ products, status }) => {
     const lastPostIndex = Currentpage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = products.slice(firstPostIndex, lastPostIndex);
-    console.log("array data:");
-    console.log(currentPosts);
+    console.log("producs data:");
+    console.log(products);
 
     // creating an array for pagination
     let PagesCount=[];

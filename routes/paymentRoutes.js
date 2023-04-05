@@ -41,11 +41,11 @@ paymentRouter.post("/paymentverification", async(req, res)=>{
     });
 
     res.redirect(
-      `http://localhost:3000/payment?status=succes&reference=${razorpay_payment_id}`
+      `/payment?status=succes&reference=${razorpay_payment_id}`
     );
   } else {
     res.redirect(
-      `http://localhost:3000/payment?status=Failed&reference=${razorpay_payment_id}`
+      `/payment?status=Failed&reference=${razorpay_payment_id}`
     );/*
     res.status(400).json({
       success: false,

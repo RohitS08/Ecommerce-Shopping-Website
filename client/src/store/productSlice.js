@@ -28,8 +28,7 @@ export const fetchProducts = () => {
         try {
             const response = await fetch(`${BASE_URL}products`);
             const data = await response.json();
-            console.log("this is product:");
-            console.log(data);
+           
             dispatch(setProducts(data));
             dispatch(setStatus(STATUS.IDLE));
         } catch (error) {

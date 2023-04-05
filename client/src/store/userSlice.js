@@ -18,7 +18,7 @@ export const {setAuthenication} = userSlice.actions;
 
 export const isAuthenticated = () =>{
   return async (dispatch) => {
-    axios.get(`/auth`,{withCredentials:true}).then((res)=>{
+    axios.get(`/api/auth`,{withCredentials:true}).then((res)=>{
       if(res.status===200){
         if(res.data.authorized)
           dispatch(setAuthenication(true));
@@ -30,7 +30,7 @@ export const isAuthenticated = () =>{
 }
 export const logout = () => {
   return async function logOutThunk(dispatch){
-    axios.get(`/logout`,{withCredentials:true}).
+    axios.get(`/api/logout`,{withCredentials:true}).
     then(res=>{
       if(res.status===200){
         console.log("Logged out");

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 import "../Login/LoginPage.css";
 
 const SignupPage = () => {
+    const [fName, setfName] = useState("");
+    const [lName, setlName] = useState("");
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
+  //  const [username, setUsername] = useState("");
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -13,12 +16,34 @@ const SignupPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ email, username, tel, password });
-        setEmail("");
-        setTel("");
-        setUsername("");
+        console.log({ email, tel, password });
+        signupUser();
+        
+    //    setUsername("");
         setPassword("");
     };
+    
+    const signupUser = ()=>{
+    
+    axios.post(`/signup`,{
+      fName,
+      lName,
+      email,
+      'phone':tel,
+      'pwd':password
+    }).then(res => {
+      if(res.status===200){
+        alert("Success");
+        setEmail("");
+        setfName("");
+        setlName("");
+        setTel("");
+        setPassword("");
+      }
+    }).catch(err=>{
+      alert(err.response.data.errMsg);
+    })
+  }
     const gotoLoginPage = () => navigate("/loginPage");
 
     return (
@@ -32,6 +57,24 @@ const SignupPage = () => {
         <div className='signup__container'>
             <h2>Sign up </h2>
             <form className='signup__form' onSubmit={handleSubmit}>
+                <label htmlFor='fName'>First Name</label>
+                <input
+                    type='text'
+                    name='fName'
+                    id='fName'
+                    value={fName}
+                    required
+                    onChange={(e) => setfName(e.target.value)}
+                />
+                <label htmlFor='lName'>Last Name</label>
+                <input
+                    type='text'
+                    name='lNamr'
+                    id='lName'
+                    value={lName}
+                    required
+                    onChange={(e) => setlName(e.target.value)}
+                />
                 <label htmlFor='email'>Email Address</label>
                 <input
                     type='email'
@@ -41,7 +84,7 @@ const SignupPage = () => {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <label htmlFor='username'>Username</label>
+               {/* <label htmlFor='username'>Username</label>
                 <input
                     type='text'
                     id='username'
@@ -49,7 +92,7 @@ const SignupPage = () => {
                     value={username}
                     required
                     onChange={(e) => setUsername(e.target.value)}
-                />
+                />*/}
                 <label htmlFor='tel'>Phone Number</label>
                 <input
                     type='tel'

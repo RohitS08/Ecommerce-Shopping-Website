@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../Login/LoginPage.css";
+import {setAuthenication} from './../../store/userSlice';
+import {useDispatch} from 'react-redux';
+import axios from 'axios';
 
 const LoginPage = () => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -11,10 +15,26 @@ const LoginPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ email, password });
-        setPassword("");
-        setEmail("");
+        loginUser();
     };
-
+    const loginUser = ()=>{
+    
+    axios.post(`/login`,{
+      email,pwd:password
+    }).
+    then(res=>{
+       if(res.status===200){
+         alert("Logged In!");
+         dispatch(setAuthenication({payload:true}));
+         setPassword("");
+        setEmail("");
+         navigate('/',{replace:true});
+       }
+    }).
+    catch(err=>{
+      alert(err.response.data.errMsg);
+    });
+  }
     const gotoSignUpPage = () => navigate("/SignupPage");
 
     return (

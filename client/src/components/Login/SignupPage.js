@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Loader from './../Loader/Loader';
 import "../Login/LoginPage.css";
 
 const SignupPage = () => {
     const [fName, setfName] = useState("");
     const [lName, setlName] = useState("");
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
   //  const [username, setUsername] = useState("");
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
@@ -20,11 +22,11 @@ const SignupPage = () => {
         signupUser();
         
     //    setUsername("");
-        setPassword("");
+      //  setPassword("");
     };
     
     const signupUser = ()=>{
-    
+    setLoading(true);
     axios.post(`/api/signup`,{
       fName,
       lName,
@@ -39,8 +41,10 @@ const SignupPage = () => {
         setlName("");
         setTel("");
         setPassword("");
+        setLoading(false);
       }
     }).catch(err=>{
+      setLoading(false);
       alert(err.response.data.errMsg);
     })
   }
@@ -56,6 +60,7 @@ const SignupPage = () => {
         </Link>
         <div className='signup__container'>
             <h2>Sign up </h2>
+            {!loading ? (
             <form className='signup__form' onSubmit={handleSubmit}>
                 <label htmlFor='fName'>First Name</label>
                 <input
@@ -120,6 +125,10 @@ const SignupPage = () => {
                     </span>
                 </p>
             </form>
+            ) : (
+              <Loader />
+            )
+          }
         </div>
         </div>
     );

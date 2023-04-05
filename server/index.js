@@ -15,11 +15,11 @@ require('./config/razorpay');
 
 const paymentRouter = require('./routes/paymentRoutes');
 
-app.use(cors(/*{
-  origin:'http://localhost:3000', 
+app.use(cors({
+  origin:'https://shopsworld.netlify.app', 
   credentials:true,
   optionSuccessStatus:200
-}*/));
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookies());

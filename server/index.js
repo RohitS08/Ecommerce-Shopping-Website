@@ -48,7 +48,10 @@ app.post('/login', async (req,res)=>{
     let token = await jwtoken.sign({_id:user._id},process.env.SECRET_KEY);
     user.token = token;
     await user.save();
-    res.cookie('jwtoken',token);
+    res.cookie('jwtoken',token,{
+      secure: true,
+      sameSite:'none'
+    });
     console.log(`${user.email} logged in`);
     return res.status(200).json({token})
   }

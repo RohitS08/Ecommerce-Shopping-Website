@@ -44,8 +44,8 @@ const CartPage = () => {
     //    console.log( GetTotalHandler());
     }
     const checkoutHandler = async (amount) => {
-        const {data:{key}} = await axios.get("/api/getkey")
-       const {data:{order}} = await axios.post("/transaction/checkout", {
+        const {data:{key}} = await axios.get("https://shopworld.onrender.com/api/getkey")
+       const {data:{order}} = await axios.post("https://shopworld.onrender.com/transaction/checkout", {
             amount:cartTotalAmout
         })
        
@@ -57,7 +57,7 @@ const CartPage = () => {
             description: "Ecommerce Website",
             image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TSGXWw3VSjCXBAV2bUSw8F3FlxTOC9H5Azn48NPW_Q&usqp=CAU&ec=48665698",
             order_id: order.id,
-            callback_url: "http://localhost:5000/transaction/paymentverification",
+            callback_url: "https://shopworld.onrender.com/transaction/paymentverification",
             prefill: {
                 name: "",
                 email: "",

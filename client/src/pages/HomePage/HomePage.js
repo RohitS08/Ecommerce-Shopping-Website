@@ -12,9 +12,7 @@ const HomePage = () => {
   const {data: categories, status: categoryStatus} = useSelector((state) => state.category);
   const {data: products, status: productStatus} = useSelector((state) => state.product);
   const {catProductAll: productsByCategory, catProductAllStatus} = useSelector((state) => state.category);
-  console.log("cat");
-  console.log(productsByCategory);
-  console.log("cat");
+  
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
@@ -24,8 +22,6 @@ const HomePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("Checking category state:");
-  console.log(productsByCategory);
 
   return (
     <div className = "home-page">

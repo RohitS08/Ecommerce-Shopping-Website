@@ -19,7 +19,7 @@ const LoginPage = () => {
     };
     const loginUser = ()=>{
     
-    axios.post(`/login`,{
+    axios.post(`https://shopworld.onrender.com/login`,{
       email,pwd:password
     }).
     then(res=>{

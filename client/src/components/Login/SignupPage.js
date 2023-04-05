@@ -25,7 +25,7 @@ const SignupPage = () => {
     
     const signupUser = ()=>{
     
-    axios.post(`/signup`,{
+    axios.post(`https://shopworld.onrender.com/signup`,{
       fName,
       lName,
       email,

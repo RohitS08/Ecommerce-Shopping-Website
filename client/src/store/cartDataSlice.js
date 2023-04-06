@@ -36,7 +36,7 @@ console.log("localStorage:");
 // Main code
 
 const initialState = {
-    cartItem: [], //fetchFromLocalStorage(),
+    cartItem: fetchFromLocalStorage(),
     cartTotlQuantity: 0,
     cartTotalAmout: 0
 };

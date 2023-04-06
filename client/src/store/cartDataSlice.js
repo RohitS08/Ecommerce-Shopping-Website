@@ -36,8 +36,8 @@ console.log("localStorage:");
 // Main code
 
 const initialState = {
-    cartItem: localStorage.getItem("cartItems")
-    ? JSON.parse(localStorage.getItem("cartItems"))
+    cartItem: localStorage.getItem("cartData")
+    ? JSON.parse(localStorage.getItem("cartData"))
     : [],
     cartTotlQuantity: 0,
     cartTotalAmout: 0

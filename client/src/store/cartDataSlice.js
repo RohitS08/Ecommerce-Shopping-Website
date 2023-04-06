@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-const fetchFromLocalStorage = () => {
+/*const fetchFromLocalStorage = () => {
     let Cart = localStorage.getItem("cartData");
     if (Cart !== undefined) {
 
@@ -14,7 +14,7 @@ const fetchFromLocalStorage = () => {
     } else {
         return [];
     }
-}
+}*/
 
 const storeInLocalStorage = (data) => {
     console.log("setItem:");
@@ -36,7 +36,9 @@ console.log("localStorage:");
 // Main code
 
 const initialState = {
-    cartItem: fetchFromLocalStorage(),
+    cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
     cartTotlQuantity: 0,
     cartTotalAmout: 0
 };

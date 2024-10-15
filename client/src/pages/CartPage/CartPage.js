@@ -45,7 +45,7 @@ const CartPage = () => {
     }
     const checkoutHandler = async (amount) => {
         const {data:{key}} = await axios.get("/api/getkey")
-       const {data:{order}} = await axios.post("/transaction/checkout", {
+       const {data:{order}} = await axios.post("/api/transaction/checkout", {
             amount:cartTotalAmout
         })
        
@@ -57,7 +57,7 @@ const CartPage = () => {
             description: "Ecommerce Website",
             image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TSGXWw3VSjCXBAV2bUSw8F3FlxTOC9H5Azn48NPW_Q&usqp=CAU&ec=48665698",
             order_id: order.id,
-            callback_url: "http://localhost:5000/transaction/paymentverification",
+            callback_url: "/api/transaction/paymentverification",
             prefill: {
                 name: "",
                 email: "",
@@ -94,6 +94,7 @@ const CartPage = () => {
             </ul>
           </div>
         </div> */}
+
          <div style={{ display: "flex", flexDirection: "row", paddingRight: 6 }}>
                   <Link to="/">
                     <div className="back">
@@ -102,6 +103,7 @@ const CartPage = () => {
                     </div>
                   </Link>
                 </div>
+
         <div className='bg-ghost-white py-5'>
             <div className='container'>
                 <div className='section-title bg-ghost-white'>
@@ -180,7 +182,7 @@ const CartPage = () => {
                                     {isLoggedIn? (
                                         <button type = "button" className='btn-secondary' onClick={checkoutHandler}>Proceed to Checkout</button>
                                        ) : (
-                                        <button type = "button" className='btn-secondary btn-danger' onClick={()=>{navigate('/login',{replace:true})}}>Login to Checkout</button>
+                                        <button type = "button" className='btn-secondary btn-danger' onClick={()=>{navigate('/loginPage',{replace:true})}}>Login to Checkout</button>
                                        )}
                                     </div>
                                 </div>

@@ -21,21 +21,16 @@ const SingleCategory = ({ products, status }) => {
     const lastPostIndex = Currentpage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = products.slice(firstPostIndex, lastPostIndex);
-    console.log("producs data:");
-    console.log(products);
 
     // creating an array for pagination
     let PagesCount=[];
     for(let i=1;i<5;i++){
         PagesCount.push(i);
     }
-    console.log("pages:");
-    console.log(PagesCount);
 
     // increment count and decrement count
     const selectPageHandler = (selectPage) => {
         if (selectPage >= 1 && selectPage <= PagesCount.length && selectPage !== Currentpage) {
-            console.log(selectPage);
             setCurrentPage(selectPage);
         }
     }
@@ -89,7 +84,7 @@ const SingleCategory = ({ products, status }) => {
 
                 {products.length > 0 && <div className='pagination' style={{marginTop:"20px",display:"flex",justifyContent:"center"}}>
 
-                    <span onClick={() => selectPageHandler(Currentpage - 1)} style={{ cursor: "pointer" }} className={ `${"leftRightIcon"} ${Currentpage > 1 ? " " : "pagination_disable"}`}><i class="fas fa-arrow-left"></i></span>
+                    <span onClick={() => selectPageHandler(Currentpage - 1)} style={{ cursor: "pointer" }} className={ `${"leftRightIcon"} ${Currentpage > 1 ? " " : "pagination_disable"}`}><i className="fas fa-arrow-left"></i></span>
 
                     {
                         PagesCount.map((page, i) => {
@@ -100,7 +95,7 @@ const SingleCategory = ({ products, status }) => {
                         })
                     }
 
-                    <span onClick={() => selectPageHandler(Currentpage + 1)} style={{ cursor: "pointer" }} className={  ` ${"leftRightIcon"} ${Currentpage === PagesCount.length ? "pagination_disable" : ""}`}><i class="fas fa-arrow-right"></i></span>
+                    <span onClick={() => selectPageHandler(Currentpage + 1)} style={{ cursor: "pointer" }} className={  ` ${"leftRightIcon"} ${Currentpage === PagesCount.length ? "pagination_disable" : ""}`}><i className="fas fa-arrow-right"></i></span>
                 </div>
 
                 }

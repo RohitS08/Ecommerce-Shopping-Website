@@ -1,4 +1,6 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
+const path = require('path');
 const cors = require('cors');
 const cookies = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -15,23 +17,24 @@ require('./config/razorpay');
 
 const paymentRouter = require('./routes/paymentRoutes');
 
-app.use(cors(/*{
-  origin:'http://localhost:3000', 
+app.use(cors({
+  origin:'https://shopsworld.netlify.app', 
   credentials:true,
   optionSuccessStatus:200
-}*/));
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookies());
 
-app.use('/transaction',paymentRouter);
+ 
+app.use('/api/transaction',paymentRouter);
 
-app.get('/auth',Authenticate, (req,res)=>{
+app.get('/api/auth',Authenticate, (req,res)=>{
   if(!req.authorized)
     return res.status(200).json({authorized:false});
   return res.status(200).json({authorized:true});
 });
-app.post('/login', async (req,res)=>{
+app.post('/api/login', async (req,res)=>{
   try{
     console.log(req.body);
   const {email,pwd} = req.body;
@@ -48,18 +51,21 @@ app.post('/login', async (req,res)=>{
     let token = await jwtoken.sign({_id:user._id},process.env.SECRET_KEY);
     user.token = token;
     await user.save();
-    res.cookie('jwtoken',token);
+    res.cookie('jwtoken',token,{
+      secure: true,
+      sameSite:'none'
+    });
     console.log(`${user.email} logged in`);
     return res.status(200).json({token})
   }
   //invalid credentials
   return res.status(400).json({errMsg:'Invalif Credentials!'});
   }catch(err){
-    console.log("/login",err);
+    console.log("/api/login",err);
     return res.status(500).json({errMsg:'Some Internal Server Error Occured!!!'})
   }
 })
-app.post('/signup',async (req,res)=>{
+app.post('/api/signup',async (req,res)=>{
   try{
     const {fName:firstName, lName:lastName, email, phone, pwd} = req.body;
     if(!firstName || !lastName || !email || !pwd || !phone)
@@ -87,7 +93,7 @@ app.post('/signup',async (req,res)=>{
     return res.status(500).json({errMsg:'Some Internal Server Error Occured!!!'})
   }
 })
-app.get('/logout', Authenticate, (req,res)=>{
+app.get('/api/logout', Authenticate, (req,res)=>{
   console.log(req.cookies.jwtoken,"-");
   res.clearCookie('jwtoken')
   res.status(200).send()
@@ -111,6 +117,12 @@ app.get("/api/getkey", (req, res) =>
   res.status(200).json({ key: process.env.RAZOR_API_KEY })
 )
 
+if (process.env.NODE_ENV === 'production') {
+    //*Set static folder up in production
+    app.use(express.static('client/build'));
+
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'client', 'build','index.html')));
+}
 
 app.listen(5000,()=>{
   console.log("Server listening on localhost:5000");

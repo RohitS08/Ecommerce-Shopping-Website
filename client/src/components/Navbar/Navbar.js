@@ -43,16 +43,21 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
-
-            <div>
-              <Link to="/loginPage">LoginSignup</Link>
-            </div>
-            {!isLoggedIn &&
+            
+            {!isLoggedIn ? (
               <div>
-                <Link to="/login" className='btn-primary custom-btn' style={{ fontSize: 15, padding: "6px 16px" }}>
-                  login
+                <Link to="/loginPage" className='btn-primary custom-btn' style={{ fontSize: 15, padding: "6px 16px" }}>
+                  Login
                 </Link>
               </div>
+             ):(
+              <div>
+                <Link to="/loginPage" className='btn-primary custom-btn' style={{ fontSize: 15, padding: "6px 16px" }}
+                onClick={()=>dispatch(logout())}>
+                  Logout
+                </Link>
+              </div>
+             )
             }
           </div>
         </div>
@@ -72,9 +77,6 @@ const Navbar = () => {
                   <li key = {category.id}><Link to = {`/category/${category.id}`} className = "nav-link text-white" onClick={() => setIsSidebarOpen(false)}><h3 style={{fontFamily:"cursive",fontSize:"1.8rem"}}>{category.name}</h3></Link></li>
                   ))
                 }
-              {isLoggedIn &&
-                <li key="logout"><Link to='/login' className="nav-link text-white" onClick={() => { dispatch(logout()) }}>Logout</Link></li>
-              }
             </ul>
               <hr></hr>
             

@@ -94,14 +94,16 @@ const CartPage = () => {
             </ul>
           </div>
         </div> */}
-        <div style={{ display: "flex", flexDirection: "row", paddingRight: 6 }}>
-          <Link to="/">
-            <div className="back">
-              <span style={{ padding: "2px 10px 0px" }}><i class="fas fa-long-arrow-left"></i></span>
-              <h3>Back to Shopping</h3>
-            </div>
-          </Link>
-        </div>
+
+         <div style={{ display: "flex", flexDirection: "row", paddingRight: 6 }}>
+                  <Link to="/">
+                    <div className="back">
+                      <span style={{ padding: "2px 10px 0px" }}><i class="fas fa-long-arrow-left"></i></span>
+                      <h3>Back to Shopping</h3>
+                    </div>
+                  </Link>
+                </div>
+
         <div className='bg-ghost-white py-5'>
             <div className='container'>
                 <div className='section-title bg-ghost-white'>
